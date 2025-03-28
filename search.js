@@ -1,21 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
     const searchBar = document.getElementById("searchBar");
+    const articles = document.querySelectorAll(".articles article, .products-grid .product-card");
 
-    if (searchBar) {
-        searchBar.addEventListener("keyup", function () {
-            let input = searchBar.value.toLowerCase();
-            let products = document.querySelectorAll(".product");
+    searchBar.addEventListener("keyup", function (event) {
+        const query = event.target.value.toLowerCase();
 
-            products.forEach(product => {
-                let title = product.querySelector(".product-title").innerText.toLowerCase();
-                let description = product.querySelector(".product-description").innerText.toLowerCase();
-
-                if (title.includes(input) || description.includes(input)) {
-                    product.style.display = "block";
-                } else {
-                    product.style.display = "none";
-                }
-            });
+        articles.forEach(article => {
+            const title = article.querySelector("h3").textContent.toLowerCase();
+            if (title.includes(query)) {
+                article.style.display = "block";
+            } else {
+                article.style.display = "none";
+            }
         });
-    }
+    });
 });
